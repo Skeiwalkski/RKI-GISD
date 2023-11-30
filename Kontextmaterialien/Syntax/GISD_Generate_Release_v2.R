@@ -345,7 +345,7 @@ Impdata <-  Workfile %>%
   mutate(value=ifelse(value<0.00001,NA,value)) %>%
   spread(key,value)
 
-my_ts_imputer <- function(data,outcome_name) {
+my_ts_imputer1 <- function(data,outcome_name) {
   mydata <- data %>%
     group_by(Gemeindekennziffer) %>%
     select(Gemeindekennziffer, Jahr,
@@ -451,23 +451,20 @@ TS_Bildung_adj <- Impdata.imputed %>%
 
 TS_Arbeitswelt_adj.pca <- prcomp(TS_Arbeitswelt_adj, center=TRUE, scale.=TRUE,
                                  retx=TRUE)
-plot(TS_Arbeitswelt_adj.pca)
 
 TS_Arbeitswelt_adj.pca <- prcomp(TS_Arbeitswelt_adj, center=TRUE, scale.=TRUE,
                                  retx=TRUE, rank.=1)
 TS_Arbeitswelt_adj.pca
 
 TS_Einkommen_adj.pca <- prcomp(TS_Einkommen_adj, center=TRUE, scale.=TRUE,
-                               retx=TRUE) 
-plot(TS_Einkommen_adj.pca)
+                               retx=TRUE)
 
 TS_Einkommen_adj.pca <- prcomp(TS_Einkommen_adj, center=TRUE, scale.=TRUE,
                                retx=TRUE, rank.=1) 
 TS_Einkommen_adj.pca
 
 TS_Bildung_adj.pca <- prcomp(TS_Bildung_adj, center=TRUE, scale.=TRUE,
-                             retx=TRUE) 
-plot(TS_Bildung_adj.pca)
+                             retx=TRUE)
 
 TS_Bildung_adj.pca <- prcomp(TS_Bildung_adj, center=TRUE, scale.=TRUE,
                              retx=TRUE, rank.=1) 
