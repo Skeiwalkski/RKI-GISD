@@ -14,7 +14,7 @@ library(sf)
 
 ## Set working directory as script directory
 # setwd("/path/to/file")
-# setwd("P:/Git/RKI-GISD/Kontextmaterialien/Syntax/")
+setwd("C:/projects_rstudio/GISD_2020/GISD/Kontextmaterialien/Syntax/")
 getwd()
 
 # Path Definitions
@@ -470,7 +470,8 @@ TS_Bildung_adj.pca <- prcomp(TS_Bildung_adj, center=TRUE, scale.=TRUE,
                              retx=TRUE, rank.=1) 
 TS_Bildung_adj.pca
 
-
+# Um die Eigenvektoren in Faktorladungen umzuwandeln müssen wir die Werte, in der Scorespalte noch mit den Wurzeln der ersten Eigenwerte multiplizieren (= Standardabweichung der jeweils ersten Komponente)
+# Bekommst Du das vielleicht hin, dass das direkt in die Score Spalte reingeschrieben wird? Bisher habe ich das nachträglich "von Hand" berechnet.
 GISD_Komponents1 <- data.frame(Variable=rownames(TS_Arbeitswelt_adj.pca$rotation),
                                Dimension="Arbeitswelt",
                                Anteil=unname(TS_Arbeitswelt_adj.pca$rotation^2),
@@ -693,7 +694,11 @@ for(mykennziffer in exportlist$Kennziffern) {
 
 
 ## VI.  Datensätze für PLZ generieren
-load("Data/SHP/GEM_Zipcode_Intersections_2015.RData") # AGS/Postcode-Intersections-Dataset in sf format
+load("../Rohdaten/GEM_Zipcode_Intersections_2015.RData") # AGS/Postcode-Intersections-Dataset in sf format
+
+# Vor dem mergen der PLZ-Daten müssen die Gemeinden aus dem Kreis Göttingen ihre alten GKZ bekommen, damit dei PLZ für diese Gemeinden angespielt werden kann.
+# Eine Liste liegt hier ab:
+# "S:\OE\FG28\205 Regionale Unterschiede\GISD\Anfragen zum GISD\PLZ Göttingen\GISD_Göttingen_PLZ.xlsx"
 
 
 for (mykennziffer in c("PLZ2","PLZ3","PLZ4","PLZ5")) {
